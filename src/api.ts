@@ -89,7 +89,7 @@ export const getPetById = ((async (event) => {
 }))
 
 /**
- * Get an owner by ID. This should return all of the owners perts.
+ * Get an owner by ID. This should return all of the owners pets.
  * Route: /api/owners/{id}
  *
  **/
@@ -133,6 +133,14 @@ export const getLostPets = ((async (event) => {
 
     // TODO: Finish implementation here
 
+    // if there is no id to get owner,
+    // then add an id for each lost pet
+    // return the new ids
+    const makeId = db.prepare("SELECT * FROM pets WHERE id=:id ");
+    let newId : Number = 0
+    if (getOwnerById != getPetById) {
+        newId = Number(event.pathParameters.id)
+    }
+
     return { statusCode: 200 }
 }))
-
